@@ -4,11 +4,11 @@
 
     if($conexion->connect_error) die("Error fatal");
 
-    if (isset($_POST['username'])&&
-        isset($_POST['password']))
+    if (isset($_POST['user'])&&
+        isset($_POST['contra']))
     {
-        $un_temp = mysql_entities_fix_string($conexion, $_POST['username']);
-        $pw_temp = mysql_entities_fix_string($conexion, $_POST['password']);
+        $un_temp = mysql_entities_fix_string($conexion, $_POST['user']);
+        $pw_temp = mysql_entities_fix_string($conexion, $_POST['contra']);
         $query   = "SELECT * FROM usuarios WHERE username='$un_temp'";
         $result  = $conexion->query($query);
         
@@ -56,18 +56,6 @@
       Registrarse</a></p>";
       }
 
-        
-    }
-    else
-    {
-      echo <<<_END
-      <h1>Ingrese</h1>
-      <form action="signin.php" method="post"><pre>
-      Usuario  <input type="text" name="username">
-      Password <input type="password" name="password">
-               <input type="submit" value="INGRESAR">
-      </form>
-      _END;
     }
 
     $conexion->close();
