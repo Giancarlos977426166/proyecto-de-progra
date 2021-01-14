@@ -2,13 +2,11 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-
-  
 }
 
 body {
   font-family: arial;
-  background-image: url('bg.jpg');
+  background-image: url('fondologin.jpg');
 }
 
 .form-login {
