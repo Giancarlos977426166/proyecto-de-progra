@@ -1,7 +1,7 @@
 <?php 
     $hn = 'localhost:3360';
-    $db = 'usuario';
-    $un = 'nota';
-    $pw = 'gean123';
+    $db = 'bd_asistencia';
+    $un = 'root';
+    $pw = '';
     $port = 3360;
 ?>
