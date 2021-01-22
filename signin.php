@@ -26,7 +26,7 @@
               
               echo <<<_END
               <pre>
-              <form action='ndiario.php' method='post'>
+              <form action='lista.html' method='post'>
               <input type='hidden' name='user' value='$un_temp'>
               <input type='submit' value='Asistencia'>
               </form>
@@ -34,7 +34,7 @@
 
                echo <<<_END
               <pre>
-              <form action='vdiario.php' method='post'>
+              <form action='inscribir.html' method='post'>
               <input type='hidden' name='user' value='$un_temp'>
               <input type='submit' value='Matricularse'>
               </form>
@@ -67,4 +67,6 @@
         if (get_magic_quotes_gpc()) $string = stripslashes($string);
         return $conexion->real_escape_string($string);
       }  
+
+
 ?>

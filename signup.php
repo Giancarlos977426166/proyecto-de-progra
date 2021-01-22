@@ -12,14 +12,25 @@
         $correo = mysql_entities_fix_string($conexion, $_POST['correo']);
         $telefono = mysql_entities_fix_string($conexion, $_POST['telefono']);
         $codigo = mysql_entities_fix_string($conexion, $_POST['Codigo']);
-
+        $rol = mysql_entities_fix_string($conexion, $_POST['rol']);
+        $a =  "Alumno";
+        $b = "Docente";
         $password = password_hash($pw_temp, PASSWORD_DEFAULT);
-        $rol = "Alumno";
+
         $query = "INSERT INTO usuario VALUES('$username', '$password', '$rol')";
-        $query2 = "INSERT INTO estudiante VALUES('$codigo', '$nombre', '$apellido','$username','$correo','$telefono')";
+        
 
         $result = $conexion->query($query);
-        $result2 = $conexion->query($query2);
+          if($rol == $a){          
+            $query2 = "INSERT INTO estudiante VALUES('$codigo', '$nombre', '$apellido','$username','$correo','$telefono')";
+            $result2 = $conexion->query($query2);
+          }elseif($rol == $b){
+            $query3 = "INSERT INTO docente VALUES('$username','$codigo', '$nombre', '$apellido','$correo','$telefono')";
+            $result3 = $conexion->query($query3);
+          }else{
+            echo "este rol no existe";
+          }
+
         if (!$result) die ("Falló registro");
 
         echo "Registro exitoso <a href='index.html'>Ingresar</a>";  

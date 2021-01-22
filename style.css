@@ -29,6 +29,20 @@ body {
   border-radius: 25px;
 }
 
+.form-vista {
+  width: 800px;
+  height: 800px;
+  background: #465152;
+  margin: left;
+  margin-top: 180px;
+  margin-left: 180px;
+  box-shadow: 7px 13px 37px #000;
+  padding: 20px 30px;
+  border-top: 4px solid #760D14;
+  color: white;
+  border-radius: 25px;
+}
+
 .Rcontrols {
   width: 400px;
   border: 1px solid #760D14;
@@ -122,3 +136,4 @@ body {
 .form-login a:hover {
   text-decoration: underline;
 }
+
