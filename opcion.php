@@ -4,6 +4,7 @@ session_start();
 if(isset( $_SESSION['nombre'])){
     $nombre=$_SESSION['nombre'];
     $rol=$_SESSION['rol'];
+    $a =  "Alumno";
 }else{
 echo 'usted no tiene autorizacion';
 die();
@@ -18,15 +19,30 @@ die();
   </head>
   <body>
     <section class="form-login">
-        <form name="asistencia" action="lista.php" method="POST">
-        <input class="controls" type="hidden" name="user" value="$nombre">
+    <?php
+    if($rol==$a){
+      echo <<<_END
+      <form name="asistencia" action="vista.php" method="POST">
         <input class="buttons" type="submit" value="Asistencia">
         </form>
         <form name="Matricula" action="lista.php" method="POST">
-        <input class="controls" type="hidden" name="user" value="$nombre">
         <input class="buttons" type="submit" value="Matricularse">
         </form>
-      <br>
+        <form name="salir" action="cerrar.php" method="POST">
+        <input class="buttons" type="submit" value="salir">
+        </form>
+      _END;
+    }else{
+      echo <<<_END
+      <form name="asistencia" action="vista.php" method="POST">
+        <input class="buttons" type="submit" value="Asistencia">
+        </form>
+        <form name="salir" action="cerrar.php" method="POST">
+        <input class="buttons" type="submit" value="salir">
+        </form>
+      _END;
+    }    
+    ?>
     </section>
   </body>
 </html>
