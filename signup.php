@@ -27,8 +27,6 @@
           }elseif($rol == $b){
             $query3 = "INSERT INTO docente VALUES('$username','$codigo', '$nombre', '$apellido','$correo','$telefono')";
             $result3 = $conexion->query($query3);
-          }else{
-            echo "este rol no existe";
           }
 
         if (!$result) die ("Falló registro");
