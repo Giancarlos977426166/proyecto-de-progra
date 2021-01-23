@@ -22,27 +22,10 @@
             {
                 session_start();
                 $_SESSION['nombre']=$row[0];
-                echo htmlspecialchars("Bienvenido '$row[0]' tu rol es '$row[2]'" );
-              
-              echo <<<_END
-              <pre>
-              <form action='lista.html' method='post'>
-              <input type='hidden' name='user' value='$un_temp'>
-              <input type='submit' value='Asistencia'>
-              </form>
-              _END;
-
-               echo <<<_END
-              <pre>
-              <form action='inscribir.html' method='post'>
-              <input type='hidden' name='user' value='$un_temp'>
-              <input type='submit' value='Matricularse'>
-              </form>
-              _END;
-              
-    
-                die ("<p><a href='logout.php'>
-              Click para salir</a></p>");
+                $_SESSION['rol']=$row[2];
+                
+                header('Location: opcion.php');
+                
             }
             else {
                 echo "Usuario/password incorrecto <p><a href='registrarse.html'>
