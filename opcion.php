@@ -5,6 +5,8 @@ if(isset( $_SESSION['nombre'])){
     $nombre=$_SESSION['nombre'];
     $rol=$_SESSION['rol'];
     $a =  "Alumno";
+    $b =  "Docente";
+    $c = "Administrador";
 }else{
 echo 'usted no tiene autorizacion';
 die();
@@ -13,14 +15,26 @@ require_once 'login.php';
     $conexion = new mysqli($hn, $un, $pw, $db, $port);
 
     if($conexion->connect_error) die("Error fatal");
-    
-$query = "SELECT * FROM estudiante where idusuario='$nombre'";
-$result = $conexion->query($query);
-if (!$result) die ("Falló el acceso a la base de datos");
-$rows = $result->num_rows;
-$row = $result->fetch_array(MYSQLI_NUM);
+if($rol==$a){
+  $query = "SELECT * FROM estudiante where idusuario='$nombre'";
+  $result = $conexion->query($query);
+  if (!$result) die ("Falló el acceso a la base de datos");
+  $rows = $result->num_rows;
+  $row = $result->fetch_array(MYSQLI_NUM);
+  
+  $idestu = htmlspecialchars($row[0]);
+}else{ if($rol==$b){
+  $query = "SELECT * FROM docente where idusuario='$nombre'";
+  $result = $conexion->query($query);
+  if (!$result) die ("Falló el acceso a la base de datos");
+  $rows = $result->num_rows;
+  $row = $result->fetch_array(MYSQLI_NUM);
+  
+  $iddoc = htmlspecialchars($row[1]);
+  }
+  
+}
 
-$idestu = htmlspecialchars($row[0]);
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -64,17 +78,56 @@ $idestu = htmlspecialchars($row[0]);
     //";
     }
     }else{
-      echo <<<_END
-      <form name="asistencia" action="vista.php" method="POST">
-        <input class="buttons" type="submit" value="Asistencia">
+      if($rol==$b){
+        $query2 = "SELECT c.codigo_asignatura,c.nombre,a.codigo_docente,a.nombre_docente FROM docente a 
+        inner join docente_asignatura b on a.codigo_docente=b.codigo_docente 
+        inner join asignatura c on b.codigo_asignatura=c.codigo_asignatura 
+        where b.codigo_docente='$iddoc'";
+        $result = $conexion->query($query2);
+        if (!$result) die ("Falló el acceso a la base de datos");
+        $rows = $result->num_rows;
+        for ($j = 0; $j < $rows; $j++)
+        {
+        $row = $result->fetch_array(MYSQLI_NUM);
+        $cod = htmlspecialchars($row[0]);
+        $nom = htmlspecialchars($row[1]);
+        $codest = htmlspecialchars($row[2]);
+        $nomest = htmlspecialchars($row[3]);
+        echo "$cod";
+        echo "$nom";
+        //echo "
+        echo <<<_END
+        <br>
+        <form name="asis" action="lista.php" method="POST">
+        <input type='hidden' name='codigocurso' value='$cod'>
+        <input type='hidden' name='nombrecurso' value='$nom'>
+        <input type='hidden' name='codigoestudiante' value='$codest'>
+        <input type='hidden' name='nombreestudiante' value='$nomest'>
+        <input class="buttons" type="submit" name="" value="llenar asistencia" >
         </form>
-        <form name="Matricula" action="lista.php" method="POST">
-        <input class="buttons" type="submit" value="Matricularse">
-        </form>
-        <form name="salir" action="cerrar.php" method="POST">
-        <input class="buttons" type="submit" value="salir">
-        </form>
-      _END;
+        <br>
+        _END;
+        //";
+      ;
+      }
+      }
+      else{ if($rol==$c){
+         //echo "
+         echo <<<_END
+         <br>
+         <form name="asis" action="docente_asignatura.php" method="POST">
+         <input class="buttons" type="submit" name="" value="agregar cursos" >
+         </form>
+         <form name="asis" action="docente_asignatura.php" method="POST">
+         <input class="buttons" type="submit" name="" value="designar curso" >
+         </form>
+         <br>
+         _END;
+         //";
+      }
+
+      }
+      
     }    
     ?>
     </section>
