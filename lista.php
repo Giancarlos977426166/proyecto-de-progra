@@ -8,6 +8,16 @@ if(isset( $_SESSION['nombre'])){
 echo 'usted no tiene autorizacion';
 die();
 }
+require_once 'login.php';
+    $conexion = new mysqli($hn, $un, $pw, $db, $port);
+
+    if($conexion->connect_error) die("Error fatal");
+$codCurso = $_POST['codigocurso'];
+$nomCurso = $_POST['nombrecurso'];
+$codEstudiante = $_POST['codigoestudiante'];
+$nomEstudiante = $_POST['nombreestudiante'];
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -19,6 +29,42 @@ die();
   <body>
     <section class="form-login">
     
+    <?php
+  $query = "SELECT fecha,estado,observaciones FROM asistencia where codigo_estudiante='$codEstudiante' AND codigo_asignatura='$codCurso'";
+  $result = $conexion->query($query);
+  if (!$result) die ("Falló el acceso a la base de datos");
+  $rows = $result->num_rows;
+  echo "$nomCurso"." ";
+  echo "$nomEstudiante"."<br />";
+  ?>
+  
+      <table><tr>
+        <td width="60">Estado</td>
+        <td width="100">Fecha</td>
+        <td>Observaciones</td>
+      </tr>
+
+      <br>  
+      
+      <?php
+      for ($j = 0; $j < $rows; $j++)
+      {
+      $row = $result->fetch_array(MYSQLI_NUM);
+      $fecha = htmlspecialchars($row[0]);
+      $estado = htmlspecialchars($row[1]);
+      $observaciones = htmlspecialchars($row[2]);
+      echo <<<_END
+      <table>
+      <tr>
+        <td width="60">$estado</td>
+        <td width="100">$fecha</td>
+        <td>$observaciones</td>
+      </tr>  
+      _END;
+      
+      }
+
+    ?>
     </section>
     
   </body>
