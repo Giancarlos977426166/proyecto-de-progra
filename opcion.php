@@ -1,8 +1,8 @@
 <?php
 session_start();
 //error_reporting(0);
-if(isset( $_SESSION['nombre'])){
-    $nombre=$_SESSION['nombre'];
+if(isset( $_SESSION['correo'])){
+    $nombre=$_SESSION['correo'];
     $rol=$_SESSION['rol'];
     $a =  "Alumno";
     $b =  "Docente";
@@ -16,7 +16,9 @@ require_once 'login.php';
 
     if($conexion->connect_error) die("Error fatal");
 if($rol==$a){
-  $query = "SELECT * FROM estudiante where idusuario='$nombre'";
+
+  $query = "SELECT * FROM estudiante where correo='$nombre'";
+
   $result = $conexion->query($query);
   if (!$result) die ("Falló el acceso a la base de datos");
   $rows = $result->num_rows;
@@ -24,7 +26,9 @@ if($rol==$a){
   
   $idestu = htmlspecialchars($row[0]);
 }else{ if($rol==$b){
-  $query = "SELECT * FROM docente where idusuario='$nombre'";
+
+  $query = "SELECT * FROM docente where correo='$nombre'";
+
   $result = $conexion->query($query);
   if (!$result) die ("Falló el acceso a la base de datos");
   $rows = $result->num_rows;
@@ -42,9 +46,30 @@ if($rol==$a){
     <meta charset="utf-8">
     <title>registro de usuario</title>
     <link rel="stylesheet" href="style.css">
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
   </head>
   <body>
-    <section class="form-login">
+    <nav>
+  
+      <div class="nav-wrapper container">
+        <a href="#" class="brand-logo right">Logo corporativo</a>
+        <ul class="left ">
+          <li><a href=""><i class="material-icons right">home</i>Inicio</a></li>
+          <li><a href="opcion.php"><i class="material-icons right">book</i>Asistencia</a></li>
+          <li><a href="matricula.php"><i class="material-icons right">library_add</i>matricularse</a></li>
+          <!-- Dropdown Trigger -->
+          <li><a class="dropdown-trigger" href="#" data-target="dropdown1">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>
+        </ul>
+
+      </div>
+
+    </nav>
+    <section class="form-registro">
     <?php
     if($rol==$a){
       $query2 = "SELECT c.codigo_asignatura,c.nombre,a.codigo_estudiante,a.nombre FROM estudiante a 
@@ -131,5 +156,7 @@ if($rol==$a){
     }    
     ?>
     </section>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   </body>
 </html>

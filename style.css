@@ -12,7 +12,7 @@ body {
   height: 100% ;
   margin: 0 ;
   border: 0 ;
-  padding: ;
+  
 }
 
 .form-registro {
@@ -67,8 +67,10 @@ body {
 }
 
 .form-login {
-  width: 600px;
-  height: 480px;
+
+  width: 400px;
+  height: 530px;
+
   background: #000;
   margin: auto;
   margin-top: 180px;

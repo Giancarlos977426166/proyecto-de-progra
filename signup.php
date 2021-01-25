@@ -3,11 +3,10 @@
     $conexion = new mysqli($hn, $un, $pw, $db, $port);
     if ($conexion->connect_error) die ("Fatal error");
 
-    if(isset($_POST['user']) && isset($_POST['contra']))
+    if(isset($_POST['correo']) && isset($_POST['contra']))
     {
         $nombre = mysql_entities_fix_string($conexion, $_POST['nombre']);
         $apellido = mysql_entities_fix_string($conexion, $_POST['apellido']);
-        $username = mysql_entities_fix_string($conexion, $_POST['user']);
         $pw_temp = mysql_entities_fix_string($conexion, $_POST['contra']);
         $correo = mysql_entities_fix_string($conexion, $_POST['correo']);
         $telefono = mysql_entities_fix_string($conexion, $_POST['telefono']);
@@ -17,15 +16,13 @@
         $b = "Docente";
         $password = password_hash($pw_temp, PASSWORD_DEFAULT);
 
-        $query = "INSERT INTO usuario VALUES('$username', '$password', '$rol')";
-        
-
+        $query = "INSERT INTO usuario VALUES('$correo', '$password', '$rol')";       
         $result = $conexion->query($query);
           if($rol == $a){          
-            $query2 = "INSERT INTO estudiante VALUES('$codigo', '$nombre', '$apellido','$username','$correo','$telefono')";
+            $query2 = "INSERT INTO estudiante VALUES('$codigo', '$nombre', '$apellido','$correo','$telefono')";
             $result2 = $conexion->query($query2);
           }elseif($rol == $b){
-            $query3 = "INSERT INTO docente VALUES('$username','$codigo', '$nombre', '$apellido','$correo','$telefono')";
+            $query3 = "INSERT INTO docente VALUES('$correo','$codigo', '$nombre', '$apellido','$telefono')";
             $result3 = $conexion->query($query3);
           }
 
