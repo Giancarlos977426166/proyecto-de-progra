@@ -48,21 +48,22 @@ require_once 'login.php';
   <body>
     <section class="form-registro">
       <h5>INGENIERIA DE SISTEMAS UNAJMA</h5>
-</br>
-      <form name="sigup" action="designar_curso.php" method="POST">
-     Codigo Asignatura:<input class="Rcontrols" type="text" name="codigoasignatura" value="" placeholder="IIAC53">
+      <form name="Nueva asignatura" action="asignarcurso.php" method="POST">
+  </select>
+     <br>     
+     Codigo_asignatura :<input class="Rcontrols" type="text" name="codigoa" value="" placeholder="IIAC53">
      <br>
-     Codigo_Docente  :<input class="Rcontrols" type="text" name="codigodocente" value="" placeholder="2005520182">
-     <br>
-     Semestre  :<input class="Rcontrols" type="text" name="semestre" value="" placeholder="I,II">
-     <br>
+     Nombre del curso : <input class="Rcontrols" type="text" name="nombrea" value="" placeholder="Programacion Web">
       <br>
-      <center><input class="Rbuttons" type="submit" name="" value="Designar curso" ></center>
       <br>
-      <a href ="vercursos.php" target="_blank">ver cursos</a></br>
-      <a href ="verdocentes.php" target="_blank">ver docente</a>
+      <center><input class="Rbuttons" type="submit" name="" value="Nueva asignatura" ></center>
+      <br>
+      <a href ="vercursos.php" target="_blank">Ver cursos</a><br><br>
       </form>
-    
+
+      <form action=""></form>
+
+
     </section>
     
   </body>

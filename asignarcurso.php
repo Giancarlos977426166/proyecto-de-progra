@@ -37,33 +37,40 @@ require_once 'login.php';
     $conexion = new mysqli($hn, $un, $pw, $db, $port);
 
     if($conexion->connect_error) die("Error fatal");
+
+    if(isset($_POST['codigoa']) && isset($_POST['nombrea']))
+    {
+        $codigoa = mysql_entities_fix_string($conexion, $_POST['codigoa']);
+        $nombrec = mysql_entities_fix_string($conexion, $_POST['nombrea']);
+        
+
+        $query = "INSERT INTO asignatura VALUES('$codigoa','$nombrec')";       
+        $result = $conexion->query($query);
+        if (!$result) die ("Falló el acceso a la base de datos");
+        echo "Curso Guardado";
+        
+        echo <<<_END
+            <br>
+            <form name="asis" action="opcion.php" method="POST">
+            <input class="buttons" type="submit" name="" value="Continuar" >
+            </form>
+            <br>
+            _END;
+
+    }
+
+
+    function mysql_entities_fix_string($conexion, $string)
+    {
+        return htmlentities(mysql_fix_string($conexion, $string));
+      }
+    function mysql_fix_string($conexion, $string)
+    {
+        if (get_magic_quotes_gpc()) $string = stripslashes($string);
+        return $conexion->real_escape_string($string);
+      }   
+
+      
+
 ?>
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-    <link rel="stylesheet" href="style.css">
-  </head>
-  <body>
-    <section class="form-registro">
-      <h5>INGENIERIA DE SISTEMAS UNAJMA</h5>
-</br>
-      <form name="sigup" action="designar_curso.php" method="POST">
-     Codigo Asignatura:<input class="Rcontrols" type="text" name="codigoasignatura" value="" placeholder="IIAC53">
-     <br>
-     Codigo_Docente  :<input class="Rcontrols" type="text" name="codigodocente" value="" placeholder="2005520182">
-     <br>
-     Semestre  :<input class="Rcontrols" type="text" name="semestre" value="" placeholder="I,II">
-     <br>
-      <br>
-      <center><input class="Rbuttons" type="submit" name="" value="Designar curso" ></center>
-      <br>
-      <a href ="vercursos.php" target="_blank">ver cursos</a></br>
-      <a href ="verdocentes.php" target="_blank">ver docente</a>
-      </form>
-    
-    </section>
-    
-  </body>
-</html>
+

@@ -1,8 +1,8 @@
 <?php
 session_start();
 //error_reporting(0);
-if(isset( $_SESSION['nombre'])){
-    $nombre=$_SESSION['nombre'];
+if(isset( $_SESSION['correo'])){
+    $nombre=$_SESSION['correo'];
     $rol=$_SESSION['rol'];
 }else{
 echo 'usted no tiene autorizacion';
@@ -56,20 +56,18 @@ $nomEstudiante = $_POST['nombreestudiante'];
       $estado = htmlspecialchars($row[1]);
       $observaciones = htmlspecialchars($row[2]);
       echo <<<_END
-      <table>
-      <tr>
-
-        <td width="100">$estado</td>
-        <td width="150">$fecha</td>
-
-        <td>$observaciones</td>
-      </tr>  
+        <table>
+          <tr>
+            <td width="100">$estado</td>
+            <td width="150">$fecha</td>
+            <td>$observaciones</td>
+          </tr>  
       _END;
       
       }
-
+    
     ?>
     </section>
-    
+        
   </body>
 </html>
