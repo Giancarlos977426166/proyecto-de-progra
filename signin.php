@@ -4,12 +4,12 @@
 
     if($conexion->connect_error) die("Error fatal");
 
-    if (isset($_POST['user'])&&
+    if (isset($_POST['correo'])&&
         isset($_POST['contra']))
     {
-        $un_temp = mysql_entities_fix_string($conexion, $_POST['user']);
+        $un_temp = mysql_entities_fix_string($conexion, $_POST['correo']);
         $pw_temp = mysql_entities_fix_string($conexion, $_POST['contra']);
-        $query   = "SELECT * FROM usuario WHERE idusuario='$un_temp'";
+        $query   = "SELECT * FROM usuario WHERE correo='$un_temp'";
         $result  = $conexion->query($query);
         
         if (!$result) die ("Usuario no encontrado");
@@ -21,7 +21,7 @@
             if (password_verify($pw_temp, $row[1])) 
             {
                 session_start();
-                $_SESSION['nombre']=$row[0];
+                $_SESSION['correo']=$row[0];
                 $_SESSION['rol']=$row[2];
                 
                 header('Location: opcion.php');
