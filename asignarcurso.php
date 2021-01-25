@@ -38,15 +38,15 @@ require_once 'login.php';
 
     if($conexion->connect_error) die("Error fatal");
 
-    if(isset($_POST['codigoa']) && isset($_POST['nombrea']))
+    if(isset($_POST['codigoa']) && isset($_POST['nombrea']) && isset($_POST['semestre']))
     {
         $codigoa = mysql_entities_fix_string($conexion, $_POST['codigoa']);
         $nombrec = mysql_entities_fix_string($conexion, $_POST['nombrea']);
-        
+        $semes = mysql_entities_fix_string($conexion, $_POST['semestre']);
 
-        $query = "INSERT INTO asignatura VALUES('$codigoa','$nombrec')";       
-        $result = $conexion->query($query);
-        if (!$result) die ("Falló el acceso a la base de datos");
+        $query3 = "INSERT INTO asignatura VALUES('$codigoa','$nombrec','$semes')";       
+        $result3 = $conexion->query($query3);
+        if (!$result3) die ("Falló el acceso a la base de datos");
         echo "Curso Guardado";
         
         echo <<<_END

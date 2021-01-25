@@ -34,8 +34,8 @@ $nomEstudiante = $_POST['nombreestudiante'];
   $result = $conexion->query($query);
   if (!$result) die ("Falló el acceso a la base de datos");
   $rows = $result->num_rows;
-  echo "$nomCurso"." ";
-  echo "$nomEstudiante"."<br />";
+  echo "Curso: "."$nomCurso"." ";
+  echo "Estudiante: "."$nomEstudiante"."<br />";
   ?>
   
       <table><tr>
@@ -56,18 +56,18 @@ $nomEstudiante = $_POST['nombreestudiante'];
       $estado = htmlspecialchars($row[1]);
       $observaciones = htmlspecialchars($row[2]);
       echo <<<_END
-        <table>
-          <tr>
-            <td width="100">$estado</td>
-            <td width="150">$fecha</td>
-            <td>$observaciones</td>
-          </tr>  
+      <table>
+      <tr>
+        <td width="100">$estado</td>
+        <td width="150">$fecha</td>
+        <td>$observaciones</td>
+      </tr>  
       _END;
       
       }
-    
+
     ?>
     </section>
-        
+    
   </body>
 </html>
