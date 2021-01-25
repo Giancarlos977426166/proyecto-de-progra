@@ -140,7 +140,7 @@ if($rol==$a){
          //echo "
          echo <<<_END
          <br>
-         <form name="asis" action="docente_asignatura.php" method="POST">
+         <form name="asis" action="asignatura.php" method="POST">
          <input class="buttons" type="submit" name="" value="agregar cursos" >
          </form>
          <form name="asis" action="docente_asignatura.php" method="POST">

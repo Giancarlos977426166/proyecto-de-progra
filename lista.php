@@ -1,8 +1,8 @@
 <?php
 session_start();
 //error_reporting(0);
-if(isset( $_SESSION['nombre'])){
-    $nombre=$_SESSION['nombre'];
+if(isset( $_SESSION['correo'])){
+    $nombre=$_SESSION['correo'];
     $rol=$_SESSION['rol'];
 }else{
 echo 'usted no tiene autorizacion';
@@ -34,8 +34,8 @@ $nomEstudiante = $_POST['nombreestudiante'];
   $result = $conexion->query($query);
   if (!$result) die ("Falló el acceso a la base de datos");
   $rows = $result->num_rows;
-  echo "$nomCurso"." ";
-  echo "$nomEstudiante"."<br />";
+  echo "Curso: "."$nomCurso"." ";
+  echo "Estudiante: "."$nomEstudiante"."<br />";
   ?>
   
       <table><tr>
@@ -58,10 +58,8 @@ $nomEstudiante = $_POST['nombreestudiante'];
       echo <<<_END
       <table>
       <tr>
-
         <td width="100">$estado</td>
         <td width="150">$fecha</td>
-
         <td>$observaciones</td>
       </tr>  
       _END;

@@ -1,8 +1,8 @@
 <?php
 session_start();
 //error_reporting(0);
-if(isset( $_SESSION['nombre'])){
-    $nombre=$_SESSION['nombre'];
+if(isset( $_SESSION['correo'])){
+    $nombre=$_SESSION['correo'];
     $rol=$_SESSION['rol'];
     $a =  "Alumno";
 }else{
@@ -13,7 +13,7 @@ require_once 'login.php';
 
     if($conexion->connect_error) die("Error fatal");
     
-$query = "SELECT * FROM estudiante where idusuario='$nombre'";
+$query = "SELECT * FROM estudiante where correo='$nombre'";
 $result = $conexion->query($query);
 if (!$result) die ("Falló el acceso a la base de datos");
 $rows = $result->num_rows;
