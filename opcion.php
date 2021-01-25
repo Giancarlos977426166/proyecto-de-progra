@@ -16,19 +16,17 @@ require_once 'login.php';
 
     if($conexion->connect_error) die("Error fatal");
 if($rol==$a){
-
   $query = "SELECT * FROM estudiante where correo='$nombre'";
-
   $result = $conexion->query($query);
   if (!$result) die ("Falló el acceso a la base de datos");
   $rows = $result->num_rows;
   $row = $result->fetch_array(MYSQLI_NUM);
   
   $idestu = htmlspecialchars($row[0]);
+  $nombr = htmlspecialchars($row[1]);
+  $apel = htmlspecialchars($row[2]);
 }else{ if($rol==$b){
-
   $query = "SELECT * FROM docente where correo='$nombre'";
-
   $result = $conexion->query($query);
   if (!$result) die ("Falló el acceso a la base de datos");
   $rows = $result->num_rows;
@@ -59,6 +57,7 @@ if($rol==$a){
       <div class="nav-wrapper container">
         <a href="#" class="brand-logo right">Logo corporativo</a>
         <ul class="left ">
+          <li><a href="" ><i class="material-icons right">menu</i></a></li>
           <li><a href=""><i class="material-icons right">home</i>Inicio</a></li>
           <li><a href="opcion.php"><i class="material-icons right">book</i>Asistencia</a></li>
           <li><a href="matricula.php"><i class="material-icons right">library_add</i>matricularse</a></li>
@@ -67,8 +66,59 @@ if($rol==$a){
         </ul>
 
       </div>
+      
 
     </nav>
+
+    <div class="container section">
+    <a href="#" class="sidenav-trigger" data-target="menu-side">
+    <i class="material-icons">menu</i></a>
+    <ul class="sidenav" id="menu-side">
+      <li>
+        <div class="user-view">
+          <div class="background">
+            <img src="mora.jpg" alt="">
+          </div>
+          <a href="#" >
+            <img src="user.jpg" alt="" class="circle">
+          </a>
+          <a>
+            <span class="name white-text"><?php echo $nombr.' '.$apel ?></span>
+          </a>
+          <a>
+            <span class="email white-text"><?php echo $nombre ?></span>
+          </a>
+        </div>
+      </li>
+      <li>
+        <a href="recuperar3.php">
+          <i class="material-icons">autorenew</i>
+          Cambiar contraseña
+        </a>
+      </li>
+      <li>
+        <a href="">
+          <i class="material-icons">cloud</i>
+          Acerca de
+        </a>
+      </li>
+      <li> <div class="divider"></div> </li>
+      <li>
+        <a href="cerrar.php">
+          <i class="material-icons">backspace</i>
+          Cerra sesion
+        </a>
+      </li>
+    </ul>
+    </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.sidenav');
+        var instances = M.Sidenav.init(elems);
+      });
+    </script>
+
     <section class="form-registro">
     <?php
     if($rol==$a){
@@ -140,7 +190,7 @@ if($rol==$a){
          //echo "
          echo <<<_END
          <br>
-         <form name="asis" action="asignatura.php" method="POST">
+         <form name="asis" action="docente_asignatura.php" method="POST">
          <input class="buttons" type="submit" name="" value="agregar cursos" >
          </form>
          <form name="asis" action="docente_asignatura.php" method="POST">
