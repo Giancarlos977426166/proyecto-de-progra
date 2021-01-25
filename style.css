@@ -67,8 +67,10 @@ body {
 }
 
 .form-login {
+
   width: 400px;
   height: 530px;
+
   background: #000;
   margin: auto;
   margin-top: 180px;

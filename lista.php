@@ -39,8 +39,10 @@ $nomEstudiante = $_POST['nombreestudiante'];
   ?>
   
       <table><tr>
+
         <td width="100">Estado</td>
         <td width="150">Fecha</td>
+
         <td>Observaciones</td>
       </tr>
 
@@ -56,8 +58,10 @@ $nomEstudiante = $_POST['nombreestudiante'];
       echo <<<_END
       <table>
       <tr>
+
         <td width="100">$estado</td>
         <td width="150">$fecha</td>
+
         <td>$observaciones</td>
       </tr>  
       _END;

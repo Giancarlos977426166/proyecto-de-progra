@@ -16,7 +16,9 @@ require_once 'login.php';
 
     if($conexion->connect_error) die("Error fatal");
 if($rol==$a){
+
   $query = "SELECT * FROM estudiante where correo='$nombre'";
+
   $result = $conexion->query($query);
   if (!$result) die ("Falló el acceso a la base de datos");
   $rows = $result->num_rows;
@@ -24,7 +26,9 @@ if($rol==$a){
   
   $idestu = htmlspecialchars($row[0]);
 }else{ if($rol==$b){
+
   $query = "SELECT * FROM docente where correo='$nombre'";
+
   $result = $conexion->query($query);
   if (!$result) die ("Falló el acceso a la base de datos");
   $rows = $result->num_rows;
