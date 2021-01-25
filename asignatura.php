@@ -55,6 +55,8 @@ require_once 'login.php';
      <br>
      Nombre del curso : <input class="Rcontrols" type="text" name="nombrea" value="" placeholder="Programacion Web">
       <br>
+     Semestre : <input class="Rcontrols" type="text" name="semestre" value="" placeholder="I,II...">
+      <br>
       <br>
       <center><input class="Rbuttons" type="submit" name="" value="Nueva asignatura" ></center>
       <br>
