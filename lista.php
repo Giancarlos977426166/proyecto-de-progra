@@ -27,7 +27,7 @@ $nomEstudiante = $_POST['nombreestudiante'];
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <section class="form-login">
+    <section class="form-registro">
     
     <?php
   $query = "SELECT fecha,estado,observaciones FROM asistencia where codigo_estudiante='$codEstudiante' AND codigo_asignatura='$codCurso'";
@@ -39,8 +39,8 @@ $nomEstudiante = $_POST['nombreestudiante'];
   ?>
   
       <table><tr>
-        <td width="60">Estado</td>
-        <td width="100">Fecha</td>
+        <td width="100">Estado</td>
+        <td width="150">Fecha</td>
         <td>Observaciones</td>
       </tr>
 
@@ -56,8 +56,8 @@ $nomEstudiante = $_POST['nombreestudiante'];
       echo <<<_END
       <table>
       <tr>
-        <td width="60">$estado</td>
-        <td width="100">$fecha</td>
+        <td width="100">$estado</td>
+        <td width="150">$fecha</td>
         <td>$observaciones</td>
       </tr>  
       _END;
