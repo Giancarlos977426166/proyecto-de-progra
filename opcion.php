@@ -55,14 +55,38 @@ if($rol==$a){
     <nav>
   
       <div class="nav-wrapper container">
-        <a href="#" class="brand-logo right">Logo corporativo</a>
-        <ul class="left ">
-          <li><a href="" ><i class="material-icons right">menu</i></a></li>
-          <li><a href=""><i class="material-icons right">home</i>Inicio</a></li>
+        <a href="#" class="brand-logo ">Registro de Asistencia</a>
+        <a href="#" class="sidenav-trigger" data-target="menu-side"><i class="material-icons">menu</i></a>
+        <ul class="hide-on-med-and-down right ">
+          
           <li><a href="opcion.php"><i class="material-icons right">book</i>Asistencia</a></li>
-          <li><a href="matricula.php"><i class="material-icons right">library_add</i>matricularse</a></li>
+          <li><a href="matricula.php"><i class="material-icons right">library_add</i>Matricularse</a></li>
           <!-- Dropdown Trigger -->
-          <li><a class="dropdown-trigger" href="#" data-target="dropdown1">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>
+          <li><a class="dropdown-trigger" href="#" data-target="caja"><?php echo $rol.': '.$nombr.' '.$apel ?><i class="material-icons right">arrow_drop_down</i></a></li>
+        </ul>
+        <ul id="caja" class="dropdown-content">
+          <li><a href="#"><?php echo $nombr.' '.$apel ?></a></li>
+          <li><a href="#"><?php echo $nombre ?></a></li>
+          <li class="divider"></li>
+          <li>
+        <a href="recuperar3.php">
+          <i class="material-icons">autorenew</i>
+          Cambiar contraseña
+        </a>
+      </li>
+      <li>
+        <a href="">
+          <i class="material-icons">cloud</i>
+          Acerca de
+        </a>
+      </li>
+      <li class="divider"></li>
+      <li>
+        <a href="cerrar.php">
+          <i class="material-icons">backspace</i>
+          Cerra sesion
+        </a>
+      </li>
         </ul>
 
       </div>
@@ -71,8 +95,6 @@ if($rol==$a){
     </nav>
 
     <div class="container section">
-    <a href="#" class="sidenav-trigger" data-target="menu-side">
-    <i class="material-icons">menu</i></a>
     <ul class="sidenav" id="menu-side">
       <li>
         <div class="user-view">
@@ -90,6 +112,13 @@ if($rol==$a){
           </a>
         </div>
       </li>
+
+      <li><a href="opcion.php"><i class="material-icons right">book</i>Asistencia</a></li>
+      <li><a href="matricula.php"><i class="material-icons right">library_add</i>matricularse</a></li>
+      <li><a class="dropdown-trigger" href="#" data-target="dropdown1">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>
+
+
+      <li> <div class="divider"></div> </li>
       <li>
         <a href="recuperar3.php">
           <i class="material-icons">autorenew</i>
@@ -116,8 +145,14 @@ if($rol==$a){
       document.addEventListener('DOMContentLoaded', function() {
         var elems = document.querySelectorAll('.sidenav');
         var instances = M.Sidenav.init(elems);
+
+        // const elemsDropdown = document.querySelectorAll('.dropdown-trigger');
+        // const instancesDropdown = Dropdown.init(elemsDropdown);
+        M.AutoInit();
       });
+      
     </script>
+    
 
     <section class="form-registro">
     <?php
