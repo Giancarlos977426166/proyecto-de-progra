@@ -34,6 +34,7 @@ if(isset( $_POST['save'])){
       <br>
       <form name="sigup" action="" method="POST">
       <input class="controls" type="password" name="contra" value="" placeholder="contraseña nueva">
+      
       <input class="controls" type="password" name="contra2" value="" placeholder="repita contraseña">
       <input class="buttons" onclick="" type="submit" name="save" value="Cambiar contraseña" >
       <br>
