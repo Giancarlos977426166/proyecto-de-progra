@@ -18,9 +18,11 @@ require_once 'login.php';
         
         $email = mysql_entities_fix_string($conexion, $_POST['email']);
         $token= generar_token_seguro(8);
+        
+        
         $query = "INSERT INTO restablecer (correo,fecha,token)VALUES('$email', ADDDATE(now(), INTERVAL '3' hour), '$token')";
         $result = $conexion->query($query); 
-        $link = "http://localhost/proyecto-de-progra/recuperar2.php?token=".$token;
+        $link = "http://localhost/proyecto-de-progra/recuperar2.php?token=".$token."&codigo=".$email;
               
 		
 		$asunto='Solicitud de Restablecimiento de contraseña';
