@@ -46,7 +46,7 @@ require_once 'login.php';
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <section class="form-login">
+    <section class="form-registro">
     
     <?php
   $query = "SELECT * FROM asignatura";
@@ -57,7 +57,7 @@ require_once 'login.php';
   
       <table><tr>
       <td  width="150">Codigo</td>
-        <td width="150">Curso</td>       
+        <td width="250">Curso</td>       
       </tr>
 
       <br>  
@@ -72,7 +72,7 @@ require_once 'login.php';
       <table>
       <tr>
         <td HEIGHT="30" width="150">$codigo</td>
-        <td HEIGHT="30" width="150">$curso</td>
+        <td HEIGHT="30" width="250">$curso</td>
       </tr>  
       _END;
       

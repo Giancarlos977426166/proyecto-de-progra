@@ -20,11 +20,21 @@
 
             if (password_verify($pw_temp, $row[1])) 
             {
+                
                 session_start();
                 $_SESSION['correo']=$row[0];
                 $_SESSION['rol']=$row[2];
+                if ($row[2]=="Alumno"){
+                    header('Location: opcion.php');
+                }else{
+                    if ($row[2]=="Docente"){
+                        header('Location: opcion2.php');
+                    }
+                    else {
+                        header('Location: opcion3.php');
+                    }
+                }
                 
-                header('Location: opcion.php');
                 
             }
             else {
