@@ -53,7 +53,7 @@ if($rol==$a){
   </head>
   <body>
     <nav>
-  
+      
       <div class="nav-wrapper container">
         <a href="#" class="brand-logo ">Registro de Asistencia</a>
         <a href="#" class="sidenav-trigger" data-target="menu-side"><i class="material-icons">menu</i></a>
@@ -156,8 +156,12 @@ if($rol==$a){
 
     <section class="form-registro">
     <?php
-    if($rol==$a){
-      $query2 = "SELECT c.codigo_asignatura,c.nombre,a.codigo_estudiante,a.nombre FROM estudiante a 
+    
+   
+
+
+
+    $query2 = "SELECT c.codigo_asignatura,c.nombre,a.codigo_estudiante,a.nombre FROM estudiante a 
     inner join matricula b on a.codigo_estudiante=b.codigo_estudiante 
     inner join asignatura c on b.codigo_asignatura=c.codigo_asignatura 
     where b.codigo_estudiante='$idestu'";
@@ -187,58 +191,7 @@ if($rol==$a){
     _END;
     //";
     }
-    }else{
-      if($rol==$b){
-        $query2 = "SELECT c.codigo_asignatura,c.nombre,a.codigo_docente,a.nombre_docente FROM docente a 
-        inner join docente_asignatura b on a.codigo_docente=b.codigo_docente 
-        inner join asignatura c on b.codigo_asignatura=c.codigo_asignatura 
-        where b.codigo_docente='$iddoc'";
-        $result = $conexion->query($query2);
-        if (!$result) die ("Falló el acceso a la base de datos");
-        $rows = $result->num_rows;
-        for ($j = 0; $j < $rows; $j++)
-        {
-        $row = $result->fetch_array(MYSQLI_NUM);
-        $cod = htmlspecialchars($row[0]);
-        $nom = htmlspecialchars($row[1]);
-        $codest = htmlspecialchars($row[2]);
-        $nomest = htmlspecialchars($row[3]);
-        echo "$cod";
-        echo "$nom";
-        //echo "
-        echo <<<_END
-        <br>
-        <form name="asis" action="lista.php" method="POST">
-        <input type='hidden' name='codigocurso' value='$cod'>
-        <input type='hidden' name='nombrecurso' value='$nom'>
-        <input type='hidden' name='codigoestudiante' value='$codest'>
-        <input type='hidden' name='nombreestudiante' value='$nomest'>
-        <input class="buttons" type="submit" name="" value="llenar asistencia" >
-        </form>
-        <br>
-        _END;
-        //";
-      ;
-      }
-      }
-      else{ if($rol==$c){
-         //echo "
-         echo <<<_END
-         <br>
-         <form name="asis" action="docente_asignatura.php" method="POST">
-         <input class="buttons" type="submit" name="" value="agregar cursos" >
-         </form>
-         <form name="asis" action="docente_asignatura.php" method="POST">
-         <input class="buttons" type="submit" name="" value="designar curso" >
-         </form>
-         <br>
-         _END;
-         //";
-      }
 
-      }
-      
-    }    
     ?>
     </section>
     <!-- Compiled and minified JavaScript -->
