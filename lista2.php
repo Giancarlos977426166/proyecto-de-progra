@@ -12,27 +12,50 @@ require_once 'login.php';
     $conexion = new mysqli($hn, $un, $pw, $db, $port);
 
     if($conexion->connect_error) die("Error fatal");
-$codCurso = $_POST['codigocurso'];
-$nomCurso = $_POST['nombrecurso'];
-$codEstudiante = $_POST['codigoestudiante'];
-$nomEstudiante = $_POST['nombreestudiante'];
+    $codAnio =  $_POST['codigoanio'];
+    $codCurso =  $_POST['codigocurso'];
+    
+    if(isset($_POST['codigoanio']) && isset($_POST['codigocurso']) && isset($_POST['codigoestudiante']))
+    {
+        $codanio =  $_POST['codigoanio'];
+        $codCu =  $_POST['codigocurso'];
+        $codEst =  $_POST['codigoestudiante'];
+        
+        $query4 = "SELECT max(ID_asistencia) from asistencia where DATE_FORMAT(fecha, '%M %d %Y') = DATE_FORMAT(now(), '%M %d %Y')"; 
+        $result4 = $conexion->query($query4);
+        $rows = $result4->num_rows;
+        $row = $result4->fetch_array(MYSQLI_NUM);
+        $max= htmlspecialchars($row[0]);
+        if (!$max){
+          $max=0;
+        }
 
-$query = "SELECT * FROM estudiante where correo='$nombre'";
-  $result = $conexion->query($query);
-  if (!$result) die ("Falló el acceso a la base de datos");
-  $rows = $result->num_rows;
-  $row = $result->fetch_array(MYSQLI_NUM);
-  
-  $idestu = htmlspecialchars($row[0]);
-  $nombr = htmlspecialchars($row[1]);
-  $apel = htmlspecialchars($row[2]);
+        $maxid = $max+1;
 
+        $query3 = "INSERT into asistencia (fecha,ID_asistencia,codigo_asignatura,codigo_anio,codigo_estudiante)
+        values (now(),'$maxid','$codCu','$codanio','$codEst')";
+        $result3 = $conexion->query($query3);
+        if (!$result3){
+        die ("Falló el acceso a la base de datos");
+        }else{
+        //header('Location: lista2.php');
+        }
+
+        // declare maxid int;
+        // set maxid= (select max(ID_asistencia) from asistencia where DATE_FORMAT(fecha, "%M %d %Y")=DATE_FORMAT(now(), "%M %d %Y"));
+        // if (maxid is null) then
+        //  set maxid=0;
+        // end if;
+        // insert into asistencia (fecha,ID_asistencia,codigo_asignatura,codigo_anio,codigo_estudiante)
+        // values (now(),maxid+1,codas,codan,codes);
+    }
+    
 
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-  <meta charset="utf-8">
+    <meta charset="utf-8">
     <title>registro de usuario</title>
     <link rel="stylesheet" href="style.css">
     <!--Import Google Icon Font-->
@@ -43,17 +66,16 @@ $query = "SELECT * FROM estudiante where correo='$nombre'";
 
   </head>
   <body>
-    <nav>
+    <!-- <nav>
       
       <div class="nav-wrapper container">
         <a href="#" class="brand-logo ">Registro de Asistencia</a>
         <a href="#" class="sidenav-trigger" data-target="menu-side"><i class="material-icons">menu</i></a>
         <ul class="hide-on-med-and-down right ">
           
-          <li><a href="opcion.php"><i class="material-icons right">book</i>Asistencia</a></li>
-          <li><a href="matricula.php"><i class="material-icons right">library_add</i>Matricularse</a></li>
-          <!-- Dropdown Trigger -->
-          <li><a class="dropdown-trigger" href="#" data-target="caja"><?php echo $rol.': '.$nombr.' '.$apel ?><i class="material-icons right">arrow_drop_down</i></a></li>
+          <li><a href="opcion2.php"><i class="material-icons right">book</i>Asistencia</a></li>
+          <li><a href="cerrar.php"><i class="material-icons right">library_add</i>cerrar sesion</a></li>
+           Dropdown Trigger 
         </ul>
         <ul id="caja" class="dropdown-content">
           <li><a href="#"><?php echo $nombr.' '.$apel ?></a></li>
@@ -142,50 +164,65 @@ $query = "SELECT * FROM estudiante where correo='$nombre'";
         M.AutoInit();
       });
       
-    </script>
-    
+    </script> -->
     
 
     <section class="form-registro">
     
-    <?php
-  $query = "SELECT fecha,estado,observaciones FROM asistencia where codigo_estudiante='$codEstudiante' AND codigo_asignatura='$codCurso'";
-  $result = $conexion->query($query);
-  if (!$result) die ("Falló el acceso a la base de datos");
-  $rows = $result->num_rows;
-  echo "Curso: "."$nomCurso"." ";
-  echo "Estudiante: "."$nomEstudiante"."<br />";
-  ?>
-  
-      <table><tr>
 
-        <td width="100">Estado</td>
-        <td width="150">Fecha</td>
-
-        <td>Observaciones</td>
-      </tr>
-
-      <br>  
-      
+   
+    
       <?php
-      for ($j = 0; $j < $rows; $j++)
-      {
-      $row = $result->fetch_array(MYSQLI_NUM);
-      $fecha = htmlspecialchars($row[0]);
-      $estado = htmlspecialchars($row[1]);
-      $observaciones = htmlspecialchars($row[2]);
-      echo <<<_END
-      <table>
-      <tr>
-        <td width="100">$estado</td>
-        <td width="150">$fecha</td>
-        <td>$observaciones</td>
-      </tr>  
-      _END;
       
-      }
+      $query = "SELECT a.nombre,a.apellidos,a.codigo_estudiante FROM estudiante a 
+        inner join matricula b on a.codigo_estudiante=b.codigo_estudiante 
+        where  codigo_asignatura='$codCurso'";
+        $result = $conexion->query($query);
+        if (!$result) die ("Falló el acceso a la base de datos");
+        $rows = $result->num_rows;
+     
+      ?>
+      
+          <table><tr>
+    
+            <td width="100">Nombre</td>
+            <td width="150">Apellido</td>
+            <td width="150">Asistencia</td>
+          </tr>
+    
+          <br> 
+          </table>
+          
+      <?php
+        for ($j = 0; $j < $rows; $j++)
+          {
+            $row = $result->fetch_array(MYSQLI_NUM);
+            $nombreE = htmlspecialchars($row[0]);
+            $apellidoE = htmlspecialchars($row[1]);
+            $codEs = htmlspecialchars($row[2]);
 
-    ?>
+            echo <<<_END
+            <form action="lista2.php" method="POST">
+              <table>
+                <tr>  
+                  <td width="100">$nombreE</td>
+                  <td width="150">$apellidoE</td>
+                  <td width="150">
+                  <input type='hidden' name='codigoanio' value='$codAnio'>
+                  <input type='hidden' name='codigocurso' value='$codCurso'>
+                  <input type='hidden' name='codigoestudiante' value='$codEs'>
+                  <input class="buttons" type="submit" name="" value="Presente" >
+                  </td>
+                </tr>
+              </table>
+            </form> 
+            _END;
+          
+          }
+          
+    
+      ?>
+ 
     </section>
     
   </body>

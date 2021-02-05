@@ -13,13 +13,14 @@ require_once 'login.php';
 
     if($conexion->connect_error) die("Error fatal");
     $cod=$_POST['codigocurso'];
-    $sem=$_POST['semestre'];
     $idestu=$_POST['codigoestudiante'];
+    $codac=$_POST['codigoacademico'];
+
     
-$query = "INSERT INTO matricula VALUES('$idestu', '$cod', '$sem')";
+$query = "INSERT INTO matricula VALUES('$idestu', '$cod', '$codac')";
 $result = $conexion->query($query);
 if (!$result){
-    echo "error al matricularse";
+    echo ($conexion->error);
 }else{
     function popup($vMsg,$vDestination) {
         echo("<html>\n");
@@ -38,7 +39,7 @@ if (!$result){
         echo("</html>\n");
         exit;
         }      
-    popup('Matricula Completada','opcion.php'.$qr);
+    popup('Matricula Completada','opcion.php');
 }
 
 
